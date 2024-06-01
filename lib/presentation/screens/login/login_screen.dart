@@ -94,8 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         SpaceHepler.horizontalMedium,
                         SocialSignupButton(
                           icon: AssetStrings.icGoogle,
-                          svgHeight: 30.91,
-                          svgWidth: 30.91,
+                          svgHeight: 28,
+                          svgWidth: 28,
                           onPressed: () {},
                         ),
                       ],
@@ -103,11 +103,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     SpaceHepler.verticalMedium,
                     InkWell(
                       onTap: () {
-                        Get.to(() => SignupScreen());
+                        Get.to(() => SignupScreen(),transition: Transition.rightToLeft);
                       },
                       child: Text(
                         'Create New Account',
-                        style: AppTextStyles.createAcount,
+                        style: AppTextStyles.createAccount,
                       ),
                     )
                   ],

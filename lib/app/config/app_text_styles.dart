@@ -12,7 +12,8 @@ class AppTextStyles {
   static TextStyle boldTitle = const TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black);
 
   static TextStyle placeHolderText = const TextStyle(fontSize: 17.36, color: AppColors.disabledColor);
-  static TextStyle createAcount = const TextStyle(fontSize: 17.36, fontWeight: FontWeight.normal, color: AppColors.accountCreation);
+  static TextStyle createAccount = const TextStyle(fontSize: 17.36, fontWeight: FontWeight.normal, color: AppColors.accountCreation);
+  static TextStyle textButton = const TextStyle(fontSize: 17.36, fontWeight: FontWeight.bold, color: AppColors.textButton);
 
   static TextStyle disabledText = const TextStyle(fontSize: 13, color: AppColors.disabledColor, letterSpacing: 0.12);
 }

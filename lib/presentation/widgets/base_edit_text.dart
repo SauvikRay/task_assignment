@@ -51,7 +51,7 @@ class _BaseEditTextState extends State<BaseEditText> {
           prefix: widget.prefixIcon != null
               ? Padding(
                   padding: const EdgeInsets.only(left: 20),
-                  child: SvgPicture.asset(widget.prefixIcon!),
+                  child: SvgPicture.asset(widget.prefixIcon!,height: 18,width: 18,),
                 )
               : null,
           suffix: widget.suffixWidget,

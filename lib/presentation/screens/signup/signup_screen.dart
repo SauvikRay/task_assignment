@@ -2,13 +2,16 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:task_assignment/app/config/app_colors.dart';
 import 'package:task_assignment/app/config/app_constants.dart';
 import 'package:task_assignment/app/config/app_space.dart';
 import 'package:task_assignment/app/config/app_text_styles.dart';
+import 'package:task_assignment/presentation/screens/product/product_screen.dart';
 import 'package:task_assignment/presentation/widgets/base_action_button.dart';
 import 'package:task_assignment/presentation/widgets/base_edit_text.dart';
+
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -18,12 +21,13 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmpasswordController = TextEditingController();
   bool isObsecure = true;
   @override
   Widget build(BuildContext context) {
-    final platformBrigthness = MediaQuery.of(context).platformBrightness;
     return GestureDetector(
       onTap: () {
         if (FocusScope.of(context).hasFocus) {
@@ -32,6 +36,7 @@ class _SignupScreenState extends State<SignupScreen> {
       },
       child: Scaffold(
           body: SingleChildScrollView(
+            physics:const BouncingScrollPhysics(),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -39,7 +44,7 @@ class _SignupScreenState extends State<SignupScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SpaceHepler.verticalSpace(kTextTabBarHeight),
+                SpaceHepler.verticalSpace(kTextTabBarHeight + kTextTabBarHeight),
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
@@ -65,8 +70,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(100),
-                          gradient: const LinearGradient(
-                              begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [AppColors.gradient1, AppColors.gradient2]),
+                          gradient: const LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [AppColors.gradient1, AppColors.gradient2]),
                           boxShadow: const [BoxShadow(blurRadius: 5, spreadRadius: 0, color: AppColors.shadowColor, offset: Offset(0, 3))]),
                       child: Center(
                         child: SvgPicture.asset(
@@ -80,37 +84,40 @@ class _SignupScreenState extends State<SignupScreen> {
                   ],
                 ),
                 SpaceHepler.verticalMedium,
-                SpaceHepler.verticalSpace(80.00),
-                Text('Sign In', style: AppTextStyles.boldTitle),
                 SpaceHepler.verticalMedium,
                 BaseEditText(
-                  textController: _textEditingController,
+                  textController: _nameController,
+                  inputType: TextInputType.text,
+                  placeHolder: 'Name',
+                  prefixIcon: AssetStrings.icMan,
+                ),
+                SpaceHepler.verticalMedium,
+                BaseEditText(
+                  textController: _emailController,
                   inputType: TextInputType.emailAddress,
                   placeHolder: 'Email',
                   prefixIcon: AssetStrings.icEmail,
                 ),
                 SpaceHepler.verticalMedium,
-                // BaseEditText(
-                //   textController: _passwordController,
-                //   inputType: TextInputType.text,
-                //   placeHolder: 'Password',
-                //   prefixIcon: AssetStrings.icLock,
-                //   isObsecure: isObsecure,
-                //   suffixWidget: IconButton(
-                //     // splashRadius: 20,
-                //     iconSize: 30,
-                //     icon: SvgPicture.asset('assets/icon/ic_close_eye.svg'),
-                //     onPressed: () {
-                //       setState(() {
-                //         isObsecure = !isObsecure;
-                //       });
-                //     },
-                //   ),
-                // ),
+                BaseEditText(
+                  textController: _passwordController,
+                  inputType: TextInputType.text,
+                  placeHolder: 'Password',
+                  prefixIcon: AssetStrings.icLock,
+                  isObsecure: isObsecure,
+                ),
                 SpaceHepler.verticalMedium,
-                Align(alignment: Alignment.centerRight, child: Text('Forgot Password?', style: AppTextStyles.disabledText)),
+                BaseEditText(
+                  textController: _confirmpasswordController,
+                  inputType: TextInputType.text,
+                  placeHolder: 'Confirm Password',
+                  prefixIcon: AssetStrings.icLock,
+                  isObsecure: isObsecure,
+                ),
                 SpaceHepler.verticalMedium,
-                BaseActionButton(title: 'Login', height: 60, onPress: () {}),
+                SpaceHepler.verticalMedium,
+                SpaceHepler.verticalMedium,
+                BaseActionButton(title: 'Sign Up', height: 60, onPress: () {Get.to(()=>ProductScreen(),transition: Transition.rightToLeft);}),
                 SpaceHepler.verticalLarge,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -129,12 +136,20 @@ class _SignupScreenState extends State<SignupScreen> {
                   ],
                 ),
                 SpaceHepler.verticalMedium,
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    'Create New Account',
-                    style: AppTextStyles.createAcount,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already have an account?',
+                      style: AppTextStyles.createAccount,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                      Get.back();
+                    },
+                    style: TextButton.styleFrom(padding: EdgeInsets.zero,elevation: 0,textStyle: AppTextStyles.textButton),child:const Text('Login'),
+                    )
+                  ],
                 )
               ],
             ),
@@ -144,3 +159,5 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 }
+
+
