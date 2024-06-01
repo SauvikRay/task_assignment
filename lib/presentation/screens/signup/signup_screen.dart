@@ -90,23 +90,23 @@ class _SignupScreenState extends State<SignupScreen> {
                   prefixIcon: AssetStrings.icEmail,
                 ),
                 SpaceHepler.verticalMedium,
-                BaseEditText(
-                  textController: _passwordController,
-                  inputType: TextInputType.text,
-                  placeHolder: 'Password',
-                  prefixIcon: AssetStrings.icLock,
-                  isObsecure: isObsecure,
-                  suffixWidget: IconButton(
-                    // splashRadius: 20,
-                    iconSize: 30,
-                    icon: SvgPicture.asset('assets/icon/ic_close_eye.svg'),
-                    onPressed: () {
-                      setState(() {
-                        isObsecure = !isObsecure;
-                      });
-                    },
-                  ),
-                ),
+                // BaseEditText(
+                //   textController: _passwordController,
+                //   inputType: TextInputType.text,
+                //   placeHolder: 'Password',
+                //   prefixIcon: AssetStrings.icLock,
+                //   isObsecure: isObsecure,
+                //   suffixWidget: IconButton(
+                //     // splashRadius: 20,
+                //     iconSize: 30,
+                //     icon: SvgPicture.asset('assets/icon/ic_close_eye.svg'),
+                //     onPressed: () {
+                //       setState(() {
+                //         isObsecure = !isObsecure;
+                //       });
+                //     },
+                //   ),
+                // ),
                 SpaceHepler.verticalMedium,
                 Align(alignment: Alignment.centerRight, child: Text('Forgot Password?', style: AppTextStyles.disabledText)),
                 SpaceHepler.verticalMedium,
