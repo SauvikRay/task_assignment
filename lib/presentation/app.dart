@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,8 @@ class App extends StatelessWidget {
           statusBarBrightness: platformBrigthness == Brightness.dark ? Brightness.dark : Brightness.light,
         statusBarColor: platformBrigthness == Brightness.dark ? Colors.black : AppColors.scaffoldColor,
         statusBarIconBrightness: platformBrigthness == Brightness.dark ? Brightness.light : Brightness.dark,
-        systemNavigationBarColor: platformBrigthness == Brightness.dark ? Colors.black : AppColors.scaffoldColor,
+        systemNavigationBarIconBrightness: platformBrigthness == Brightness.dark?Brightness.light : Brightness.dark,
+        systemNavigationBarColor:platformBrigthness == Brightness.dark ? Colors.black87: AppColors.scaffoldColor,
         ),
         
         child: const LoginScreen()),

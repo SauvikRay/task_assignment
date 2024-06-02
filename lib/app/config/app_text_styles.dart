@@ -10,6 +10,7 @@ class AppTextStyles {
   AppTextStyles._();
 
   static TextStyle boldTitle = const TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black);
+  static TextStyle appBarTitle = const TextStyle(fontSize: 22.57, fontWeight: FontWeight.bold, color: Colors.black);
 
   static TextStyle placeHolderText = const TextStyle(fontSize: 17.36, color: AppColors.disabledColor);
   static TextStyle createAccount = const TextStyle(fontSize: 17.36, fontWeight: FontWeight.normal, color: AppColors.accountCreation);

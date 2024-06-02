@@ -1,16 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:task_assignment/app/config/app_colors.dart';
 import 'package:task_assignment/app/config/app_constants.dart';
 import 'package:task_assignment/app/config/app_space.dart';
 import 'package:task_assignment/app/config/app_text_styles.dart';
-import 'package:task_assignment/presentation/screens/product/product_screen.dart';
 import 'package:task_assignment/presentation/widgets/base_action_button.dart';
 import 'package:task_assignment/presentation/widgets/base_edit_text.dart';
+
+import '../bottom_navigation_bar/main_navigation_bar.dart';
 
 
 class SignupScreen extends StatefulWidget {
@@ -117,7 +115,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 SpaceHepler.verticalMedium,
                 SpaceHepler.verticalMedium,
                 SpaceHepler.verticalMedium,
-                BaseActionButton(title: 'Sign Up', height: 60, onPress: () {Get.to(()=>ProductScreen(),transition: Transition.rightToLeft);}),
+                BaseActionButton(title: 'Sign Up', height: 60, onPress: () {Get.to(()=>MainBottomNavigationBar(),transition: Transition.rightToLeft);}),
                 SpaceHepler.verticalLarge,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
