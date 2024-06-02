@@ -37,6 +37,9 @@ dependencies:
   get:
   cached_network_image:
   svg_flutter: ^0.0.1
+  dio:
+  logger:
+  get_storage:
 
 dev_dependencies:
   flutter_test:
