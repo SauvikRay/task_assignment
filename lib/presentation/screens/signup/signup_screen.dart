@@ -8,7 +8,8 @@ import 'package:task_assignment/app/config/app_text_styles.dart';
 import 'package:task_assignment/presentation/widgets/base_action_button.dart';
 import 'package:task_assignment/presentation/widgets/base_edit_text.dart';
 
-import '../bottom_navigation_bar/main_navigation_bar.dart';
+import '../../../app/config/asset_strings.dart';
+import '../bottom_navigation_bar/main_navigation_screen.dart';
 
 
 class SignupScreen extends StatefulWidget {

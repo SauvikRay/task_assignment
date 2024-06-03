@@ -14,5 +14,9 @@ class AppColors {
   static const Color gradient4 = Color(0xFFFF7B51);
   static const Color textButton = Color(0xFF2893E3);
   static const Color overlayBAckground = Color(0xFF007AFF);
+  static const Color appbarTitleColor = Color(0xFF222455);
+  static const Color disableTextColor = Color(0xFF818995);
+  static const Color checkBoxActive = Color(0xFFFF708A);
+
   // static Color lightGray = HexColor("D3D3D3");
 }

@@ -5,12 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:task_assignment/app/config/app_colors.dart';
-import 'package:task_assignment/app/config/app_constants.dart';
+
 import 'package:task_assignment/app/config/app_space.dart';
 import 'package:task_assignment/app/config/app_text_styles.dart';
 import 'package:task_assignment/presentation/screens/signup/signup_screen.dart';
 import 'package:task_assignment/presentation/widgets/base_action_button.dart';
 import 'package:task_assignment/presentation/widgets/base_edit_text.dart';
+
+import '../../../app/config/asset_strings.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

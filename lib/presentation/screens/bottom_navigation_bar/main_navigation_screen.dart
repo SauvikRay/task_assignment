@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:task_assignment/app/config/app_colors.dart';
 import 'package:task_assignment/app/config/app_constants.dart';
+import 'package:task_assignment/app/config/asset_strings.dart';
 
 import '../product/product_screen.dart';
 import 'custom_bottom_appbar.dart';
@@ -48,25 +49,39 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
             },
             items: [
               TabItem(
-                  icon: SvgPicture.asset(
-                'assets/icon/ic_home.svg',
-              )),
+                  icon: SvgPicture.asset( AssetStrings.icHome
+               
+              ),activeIcon:SvgPicture.asset(
+                AssetStrings.icHome,colorFilter:const ColorFilter.mode(AppColors.gradient3,BlendMode.srcIn),
+              ) ),
               TabItem(
                 icon: SvgPicture.asset(
-                  'assets/icon/ic_box.svg',
+                 AssetStrings.icBox,
                 ),
+                activeIcon:SvgPicture.asset(
+                AssetStrings.icBox,colorFilter:const ColorFilter.mode(AppColors.gradient3,BlendMode.srcIn),
+              )
+
               ),
               TabItem(
                 icon: SvgPicture.asset(
-                  'assets/icon/ic_cart.svg',
+                 AssetStrings.icCart,
                 ),
+                 activeIcon:SvgPicture.asset(
+                AssetStrings.icCart,colorFilter:const ColorFilter.mode(AppColors.gradient3,BlendMode.srcIn),
+              )
               ),
               TabItem(
                   icon: SvgPicture.asset(
-                'assets/icon/ic_man.svg',
+                AssetStrings.icMan,
                 height: 25,
                 width: 25,
-              )),
+              ),
+               activeIcon:SvgPicture.asset(
+                AssetStrings.icMan, height: 25,
+                width: 25,colorFilter:const ColorFilter.mode(AppColors.gradient3,BlendMode.srcIn),
+              )
+              ),
             ]));
   }
 }
