@@ -6,6 +6,7 @@ import 'package:task_assignment/app/config/app_colors.dart';
 import 'package:task_assignment/presentation/screens/login/login_screen.dart';
 
 import '../app/services/navigation_services.dart';
+import 'screens/bottom_navigation_bar/main_navigation_screen.dart';
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -34,7 +35,7 @@ class App extends StatelessWidget {
         systemNavigationBarColor:platformBrigthness == Brightness.dark ? Colors.black87: AppColors.scaffoldColor,
         ),
         
-        child: const LoginScreen()),
-    );
+        child:MainBottomNavigationBar() // const LoginScreen()),
+    ));
   }
 }

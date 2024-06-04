@@ -7,6 +7,7 @@ import 'package:task_assignment/app/config/app_colors.dart';
 import 'package:task_assignment/app/config/app_constants.dart';
 import 'package:task_assignment/app/config/asset_strings.dart';
 
+import '../account/account_screen.dart';
 import '../product/product_screen.dart';
 import 'custom_bottom_appbar.dart';
 import 'roundedcorner_circular_notch.dart';

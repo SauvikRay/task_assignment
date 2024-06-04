@@ -17,6 +17,7 @@ class AppTextStyles {
   static TextStyle textButton = const TextStyle(fontSize: 17.36, fontWeight: FontWeight.bold, color: AppColors.textButton);
 
   static TextStyle disabledText = const TextStyle(fontSize: 13, color: AppColors.disabledColor, letterSpacing: 0.12);
+  static TextStyle productText = const TextStyle(fontSize: 13, color: Colors.black, letterSpacing: 0.12);
   static TextStyle warningText =  const TextStyle(fontSize: 14, color: AppColors.scaffoldColor,fontWeight: FontWeight.w400, letterSpacing: 0.12);
   static TextStyle disableText({Color? color}) =>   TextStyle(fontSize: 15.63, color:color?? AppColors.disableTextColor,fontWeight: FontWeight.normal, letterSpacing: 0.14);
 }
