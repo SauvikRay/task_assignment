@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -23,28 +22,43 @@ class ProductWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Expanded(child: Image.asset('assets/model.png',fit: BoxFit.contain,)),
-            SizedBox(height: 115,
+            Expanded(
+                child: Image.asset(
+              'assets/model.png',
+              fit: BoxFit.contain,
+            )),
+            SizedBox(
+              height: 115,
               width: double.infinity,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
-                    Text('This is the very very important Productvery important Product',style: AppTextStyles.productText,maxLines: 2,overflow: TextOverflow.ellipsis,),
+                    Text(
+                      'This is the very very important Productvery important Product',
+                      style: AppTextStyles.productText,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     SpaceHepler.verticalSpace(8),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text('\$150',style: TextStyle(decoration: TextDecoration.lineThrough,fontSize: 15,color: AppColors.disabledColor),),
+                        Text(
+                          '\$150',
+                          style: TextStyle(decoration: TextDecoration.lineThrough, fontSize: 15, color: AppColors.disabledColor),
+                        ),
                         SpaceHepler.horizontalSmall,
-                        Text('\$150',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color:Colors.black),),
+                        Text(
+                          '\$150',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
                       ],
                     ),
                     SpaceHepler.verticalSmall,
                     RatingBar.builder(
-                      itemSize: 12,
+                      itemSize: 15,
                       initialRating: 4,
                       minRating: 1,
                       direction: Axis.horizontal,
@@ -63,7 +77,8 @@ class ProductWidget extends StatelessWidget {
                 ),
               ),
             )
-          ],),
+          ],
+        ),
       ),
     );
   }

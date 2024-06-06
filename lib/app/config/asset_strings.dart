@@ -10,8 +10,9 @@ class AssetStrings {
   static String icCam = 'assets/icon/ic_cam.svg';
   static String icfilter = 'assets/icon/ic_filter.svg';
   static String icDrawer = 'assets/icon/ic_drawer.svg';
-  static String icHome =  'assets/icon/ic_home.svg';
-  static String icBox =   'assets/icon/ic_box.svg';
-  static String icCart =    'assets/icon/ic_cart.svg';
-
+  static String icHome = 'assets/icon/ic_home.svg';
+  static String icBox = 'assets/icon/ic_box.svg';
+  static String icCart = 'assets/icon/ic_cart.svg';
+  static String icNotify = 'assets/icon/ic_notification.svg';
+  static String icLove = 'assets/icon/ic_love.svg';
 }
