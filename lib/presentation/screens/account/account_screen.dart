@@ -5,11 +5,14 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:task_assignment/app/config/app_space.dart';
 import 'package:task_assignment/app/config/asset_strings.dart';
+import 'package:task_assignment/presentation/controllers/account_controller.dart';
 import 'package:task_assignment/presentation/widgets/apply_and_cancle_button.dart';
+import 'package:task_assignment/presentation/widgets/base_action_button.dart';
 import 'package:task_assignment/presentation/widgets/base_edit_text.dart';
 
 import '../../../app/config/app_colors.dart';
@@ -23,6 +26,30 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  final _accountController = Get.put(AccountController());
+     TextEditingController emailcontroller=TextEditingController();
+     TextEditingController nameController=TextEditingController();
+     TextEditingController nickNameController=TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){{
+   _accountController.getUserDetails().then((value) {
+     emailcontroller.text=_accountController.userEmail;
+     nameController.text=_accountController.userName;
+     nickNameController.text=_accountController.nickName;
+   },);
+  
+    }});
+
+  }
+
+  @override
+  void dispose() {
+    
+    super.dispose();
+  }
+
   Widget prepareProfileRelatedData(List<ProfileUtilityModel> models) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -77,99 +104,102 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                 ),
                 childrenPadding: const EdgeInsets.only(bottom: 10, top: 10, left: 10, right: 10),
-                children: [
-                  if (index == 0)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Email',
-                          style: AppTextStyles.tileTitle,
-                        ),
-                        SpaceHepler.verticalSmall,
-                        BaseEditText(
-                          textController: TextEditingController(text: 'sauvik@gmail.com'),
-                          inputType: TextInputType.text,
-                          placeHolder: 'Email',
-                        ),
-                        SpaceHepler.verticalMedium,
-                        Text(
-                          'Full Name',
-                          style: AppTextStyles.tileTitle,
-                        ),
-                        SpaceHepler.verticalSmall,
-                        BaseEditText(
-                          textController: TextEditingController(text: 'sauvik@gmail.com'),
-                          inputType: TextInputType.text,
-                          placeHolder: 'Email',
-                        ),
-                        SpaceHepler.verticalMedium,
-                        Text(
-                          'Street Address',
-                          style: AppTextStyles.tileTitle,
-                        ),
-                        SpaceHepler.verticalSmall,
-                        BaseEditText(
-                          textController: TextEditingController(text: 'sauvik@gmail.com'),
-                          inputType: TextInputType.text,
-                          placeHolder: 'Email',
-                        ),
-                        SpaceHepler.verticalMedium,
-                        Text(
-                          'Apt, Suite, Bldg (optional)',
-                          style: AppTextStyles.tileTitle,
-                        ),
-                        SpaceHepler.verticalSmall,
-                        BaseEditText(
-                          textController: TextEditingController(text: 'sauvik@gmail.com'),
-                          inputType: TextInputType.text,
-                          placeHolder: 'Email',
-                        ),
-                        SpaceHepler.verticalMedium,
-                        Text(
-                          'Zip Code',
-                          style: AppTextStyles.tileTitle,
-                        ),
-                        SpaceHepler.verticalSmall,
-                        BaseEditText(
-                          textController: TextEditingController(text: 'sauvik@gmail.com'),
-                          inputType: TextInputType.text,
-                          placeHolder: 'Email',
-                        ),
-                        SpaceHepler.verticalMedium,
-                        ApplyAndCancleButton(buttonWidth: 110, onCancle: () {}, onApply: () {})
-                      ],
-                    ),
-                ],
+                children: [_handleItemClick(index)],
               );
             }),
       ),
     );
   }
 
-  _handleItemClick(ProfileElementMapper elementId, BuildContext context) {
-    // Check user is logged in or not
+  Column _accountDetails() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Email',
+          style: AppTextStyles.tileTitle,
+        ),
+        SpaceHepler.verticalSmall,
+        BaseEditText(
+          textController:emailcontroller ,
+          inputType: TextInputType.text,
+          placeHolder: 'Email',
+          placeHolderColor: AppColors.disableTextColor
+        ),
+        SpaceHepler.verticalMedium,
+        Text(
+          'Full Name',
+          style: AppTextStyles.tileTitle,
+        ),
+        SpaceHepler.verticalSmall,
+        BaseEditText(
+          textController:nameController,
+          inputType: TextInputType.text,
+          placeHolder: 'Full Name',
+          placeHolderColor: AppColors.disableTextColor
+        ),
+        SpaceHepler.verticalMedium,
+        Text(
+          'Street Address',
+          style: AppTextStyles.tileTitle,
+        ),
+        SpaceHepler.verticalSmall,
+        BaseEditText(
+          textController: TextEditingController(text: '465 Nolan Causeway Suite 079'),
+          inputType: TextInputType.text,
+          placeHolder: 'Street Address',
+          placeHolderColor: AppColors.disableTextColor
+        ),
+        SpaceHepler.verticalMedium,
+        Text(
+          'Apt, Suite, Bldg (optional)',
+          style: AppTextStyles.tileTitle,
+        ),
+        SpaceHepler.verticalSmall,
+        BaseEditText(
+          textController: TextEditingController(text: 'Unit 512'),
+          inputType: TextInputType.text,
+          placeHolderColor: AppColors.disableTextColor,
+          placeHolder: 'Apt, Suite, Bldg (optional)',
+        ),
+        SpaceHepler.verticalMedium,
+        Text(
+          'Zip Code',
+          style: AppTextStyles.tileTitle,
+        ),
+        SpaceHepler.verticalSmall,
+        BaseEditText(
+          textController: TextEditingController(text: '9100'),
+          inputType: TextInputType.text,
+          placeHolder: 'Zip Code',
+          placeHolderColor: AppColors.disableTextColor
+        ),
+        SpaceHepler.verticalMedium,
+        ApplyAndCancleButton(buttonWidth: 110, onCancle: () {}, onApply: () {})
+      ],
+    );
+  }
 
-    //eta por e comment out korte hobe ekon tuo user loggin nei tai kaj korar jonno comment kore raka
+  Widget _handleItemClick(int index) {
+    Widget item = Container();
 
-    // if (!_controller.isLoggedIn.value) {
-    //   // Goto sign in page
-    //   Get.to(() => const SignInScreen());
-    //   return;
-    // }
+    switch (index) {
+      case 0:
+    
+        item = _accountDetails();
+        break;
 
-    switch (elementId) {
-      case ProfileElementMapper.account:
-        // Navigator.pushNamed(context, '/next2');
-        // Goto bookmark page
+      case 1:
+        item = Container();
         break;
-      case ProfileElementMapper.password:
+      case 2:
+        item = Container();
         break;
-      case ProfileElementMapper.noptification:
-        break;
-      case ProfileElementMapper.wishlist:
+      case 3:
+        item = Container();
         break;
     }
+    return item;
   }
 
   List<ProfileUtilityModel> _prepareSupportUs() {
@@ -213,20 +243,19 @@ class _AccountPageState extends State<AccountPage> {
             Text('Sauvik Ray', style: AppTextStyles.boldTitle),
             SpaceHepler.verticalSmall,
             Text('info@johnsmith.com', style: AppTextStyles.disableText(color: const Color(0xFF535353))),
-
             SpaceHepler.verticalMedium,
-
-            prepareProfileRelatedData(_prepareSupportUs())
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, '/next2');
-            //   },
-            //   child: const Text('Next Page'),
-            // ),
-            // ElevatedButton(
-            //   onPressed: () {},
-            //   child: const Text('Next Page 2'),
-            // ),
+            prepareProfileRelatedData(_prepareSupportUs()),
+            SpaceHepler.verticalMedium,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 60),
+              child: BaseActionButton(
+                onPress: () {
+                  _accountController.userLogOut(context);
+                },
+                title: 'Logout',
+              ),
+            ),
+            SpaceHepler.verticalMedium,
           ],
         ),
       ),

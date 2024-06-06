@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:task_assignment/app/config/app_colors.dart';
+import 'package:task_assignment/data/helper/prefe_keys.dart';
 import 'package:task_assignment/presentation/screens/login/login_screen.dart';
 
 import '../app/services/navigation_services.dart';
@@ -10,14 +12,14 @@ import 'screens/bottom_navigation_bar/main_navigation_screen.dart';
 class App extends StatelessWidget {
   const App({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     final platformBrigthness=MediaQuery.of(context).platformBrightness;
+    final _storage= GetStorage();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: false,fontFamily: 'Roboto',brightness: Brightness.light).copyWith(
-        
-        
         scaffoldBackgroundColor: AppColors.scaffoldColor,
           pageTransitionsTheme: const PageTransitionsTheme(builders: {
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
@@ -35,7 +37,7 @@ class App extends StatelessWidget {
         systemNavigationBarColor:platformBrigthness == Brightness.dark ? Colors.black87: AppColors.scaffoldColor,
         ),
         
-        child: const LoginScreen(),
+        child: _storage.read(PrefKeys.isLoggedIn)?const  MainBottomNavigationBar() : const LoginScreen(),
     ));
   }
 }

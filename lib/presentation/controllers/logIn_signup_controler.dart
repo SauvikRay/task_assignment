@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -52,9 +54,11 @@ final _storage=GetStorage();
       if(signInResponse.statusCode==200){
         Get.back();
 
-
+Map<String,dynamic> userData= {'name':signInResponse.userDisplayName,'email':signInResponse.userEmail,'nickName':signInResponse.userNicename};
         _storage.write(PrefKeys.usersToken, signInResponse.token);
         _storage.write(PrefKeys.isLoggedIn, true);
+
+        _storage.write(PrefKeys.userData,userData);
         dev.log("usersingUpToken ${_storage.read(PrefKeys.usersToken)}");
         if (kDebugMode) {
           print("Sing in SucessFull");
@@ -77,5 +81,65 @@ final _storage=GetStorage();
   
 
 
+
+_processSignUp(TextEditingController nameController,TextEditingController emailCOntroller,TextEditingController passwordController,TextEditingController confPasswordController) {
+    String firstName = nameController.text;
+
+    String email = emailCOntroller.text.trim();
+    String password = passwordController.text;
+    String confirmedPass = confPasswordController.text;
+    
+    String errorMessage = "";
+
+    if (firstName.isEmpty) {
+      errorMessage = AppText.firstName;
+    } else if (email.isEmpty) {
+      errorMessage = AppText.emailText;
+    } else if (!GetUtils.isEmail(email)) {
+      errorMessage = AppText.emailFormet;
+    } else if (password.isEmpty) {
+      errorMessage = AppText.passwordText;
+    } else if (password.length < 6) {
+      errorMessage = AppText.passwordLength;
+    }  else if (password != confirmedPass) {
+      errorMessage = AppText.passConfirmNotMatch;
+    }
+
+    if (errorMessage.isEmpty) {
+    signUp(firstName, email, password);
+
+    } else {
+      Fluttertoast.showToast(msg: errorMessage);
+    }
+  }
+
+
+
+
+
+void signUp(String fName,  String email,  String password) async {
+    await showLoader();
+    try {
+      // var response = await _repository.singUpDetails(fName, lName, email, birth, password, gender, loaction);
+
+      // if (response.status == true) {
+      //   var userToken = "${response.data?.token}";
+
+      //   _storage.write(PrefKeys.usersToken, userToken);
+      //   singUpResponse.value = response;
+      //   Fluttertoast.showToast(msg: response.message ?? "");
+      //   _storage.write(PrefKeys.isLoggedIn, true);
+
+      //   if (kDebugMode) {
+      //     print("postsingUpetails");
+      //   }
+      // } else {
+      //   Fluttertoast.showToast(msg: response.message ?? "Something went wrong");
+      // }
+      // Get.back();
+    } catch (erroe) {
+      Get.back();
+    }
+  }
   
 }

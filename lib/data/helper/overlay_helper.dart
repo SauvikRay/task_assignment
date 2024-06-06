@@ -56,7 +56,7 @@ class _OverlayBannerState extends State<OverlayBanner> with SingleTickerProvider
       animation: _controller,
       child: SingleChildScrollView(
         child: Material(
-          color: AppColors.overlayBAckground ,
+          color: Colors.redAccent ,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -76,7 +76,7 @@ class _OverlayBannerState extends State<OverlayBanner> with SingleTickerProvider
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(widget.message, maxLines: 2, style: AppTextStyles.warningText),
+                          Expanded(child: Text(widget.message, maxLines: 2, style: AppTextStyles.warningText)),
                         ],
                       ),
                     ),

@@ -6,7 +6,7 @@ import 'package:task_assignment/app/config/app_colors.dart';
 
 import 'package:task_assignment/app/config/app_space.dart';
 import 'package:task_assignment/app/config/app_text_styles.dart';
-import 'package:task_assignment/presentation/controllers/logIn_controler.dart';
+import 'package:task_assignment/presentation/controllers/logIn_signup_controler.dart';
 import 'package:task_assignment/presentation/screens/signup/signup_screen.dart';
 import 'package:task_assignment/presentation/widgets/base_action_button.dart';
 import 'package:task_assignment/presentation/widgets/base_edit_text.dart';

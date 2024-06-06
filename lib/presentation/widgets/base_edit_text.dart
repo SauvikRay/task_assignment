@@ -14,6 +14,7 @@ class BaseEditText extends StatefulWidget {
   bool readeOnly;
   String? prefixIcon;
   Widget? suffixWidget;
+  final Color? placeHolderColor;
 
   BaseEditText(
       {super.key,
@@ -25,7 +26,10 @@ class BaseEditText extends StatefulWidget {
       this.onTap,
       this.readeOnly = false,
       this.prefixIcon,
-      this.suffixWidget});
+      this.suffixWidget,
+      this.placeHolderColor,
+      
+      });
 
   @override
   State<BaseEditText> createState() => _BaseEditTextState();
@@ -38,8 +42,8 @@ class _BaseEditTextState extends State<BaseEditText> {
     return SizedBox(
       height: 60.00,
       child: Material(
-        shadowColor: AppColors.shadowColor,
-        elevation: 1,
+        shadowColor: const Color(0xff395AB8).withOpacity(0.5),
+        elevation: 2,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
           Radius.circular(10),
@@ -68,7 +72,7 @@ class _BaseEditTextState extends State<BaseEditText> {
             ),
           ),
           placeholder: widget.placeHolder,
-          style: AppTextStyles.placeHolderText(color: null),
+          style: AppTextStyles.placeHolderText(color:widget.placeHolderColor?? Colors.black),
           keyboardType: widget.inputType,
           obscureText: widget.isObsecure,
         ),

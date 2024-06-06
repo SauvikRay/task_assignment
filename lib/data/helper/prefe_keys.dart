@@ -3,6 +3,7 @@ class PrefKeys {
   static const isUserTopicsSelected = "isUserTopicsSelected";
   static const mySelectedTopic = "mySelectedTopic";
   static const isLoggedIn = "isLoggedIn";
+  static const userData = "userData";
   static const firebaseToken = "firebaseToken";
   static const usersToken = "usersingUpToken";
   static const resetEmail = "resetEmail";
