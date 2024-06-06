@@ -30,6 +30,7 @@ dependencies:
   get_storage:
   flutter_rating_bar:
   dotted_border:
+  fluttertoast:
 
 dev_dependencies:
   flutter_test:

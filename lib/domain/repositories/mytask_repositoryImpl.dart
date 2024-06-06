@@ -1,10 +1,16 @@
-
-
+import 'package:get/get.dart';
+import 'package:task_assignment/data/remote/datasource/mytask_remote_data_source.dart';
 import 'package:task_assignment/domain/repositories/mytask_repository.dart';
 
-class AllNewsRepositoryImpl implements MyTaskRepository {
-  // final AllNewsRemoteDataSource _dataSource = Get.put(AllNewsRemoteDataSourceImpl());
+import '../../data/models/login_response.dart';
+import '../../data/remote/datasource/mytask_remote_data_sourceImpl.dart';
 
- 
+class MyTaskRepositoryImpl implements MyTaskRepository {
+  final MyTaskRemoteDataSource _dataSource = Get.find<MytaskRemoteDataSourceimpl>();
+
+@override
+  Future<LoginResponse> userLogin(String email, String password) {
+    return _dataSource.userLogin(email, password);
+  }
 }
 //End

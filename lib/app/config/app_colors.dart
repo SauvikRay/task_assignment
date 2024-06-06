@@ -17,6 +17,8 @@ class AppColors {
   static const Color appbarTitleColor = Color(0xFF222455);
   static const Color disableTextColor = Color(0xFF818995);
   static const Color checkBoxActive = Color(0xFFFF708A);
+  static const Color loaderColor = Color(0xFFF2F2F7);
+
 
   // static Color lightGray = HexColor("D3D3D3");
 }

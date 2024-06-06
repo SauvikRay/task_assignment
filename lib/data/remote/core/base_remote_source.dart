@@ -24,19 +24,19 @@ abstract class BaseRemoteSource {
   final dataLimit = 20;
 
   Future<Response<T>> getRequest<T>(String url, {Map<String, dynamic>? queryParams}) {
-    var path = "${DioProvider.baseUrl}api/$url";
+    var path = "${DioProvider.baseUrl}$url";
     var optionsWithoutToken = Options(headers: {});
     bool isLoggedIn = storage.read(PrefKeys.isLoggedIn) ?? false;
     var optionsWithToken = Options(headers: {'token': getUserToken()});
     return dioClient.get(path, queryParameters: queryParams, options: isLoggedIn ? optionsWithToken : optionsWithoutToken);
   }
 
-  Future<Response<T>> postRequest<T>(String url, {Object? bodyParams}) {
-    var path = "${DioProvider.baseUrl}api/$url";
-    var optionsWithoutToken = Options(headers: {});
+  Future<Response<T>> postRequest<T>(String url, {Object? bodyParams,Options? options}) {
+    var path = "${DioProvider.baseUrl}$url";
+  
     bool isLoggedIn = storage.read(PrefKeys.isLoggedIn) ?? false;
     var optionsWithToken = Options(headers: {'token': getUserToken()});
-    return dioClient.post(path, data: bodyParams, options: isLoggedIn ? optionsWithToken : optionsWithoutToken);
+    return dioClient.post(path, data: bodyParams, options: isLoggedIn ? optionsWithToken : options);
   }
 
   String getUserToken() {

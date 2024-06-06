@@ -6,16 +6,17 @@ import 'request_headers.dart';
 
 class DioProvider {
   // static const String baseUrl = "https://dev.perfectedgetech.com/all-dev-projects/allnews-dev/";
-  static const String baseUrl = ""; //Live
+  static const String baseUrl = "https://apptest.dokandemo.com/"; //Live
 
-  static const String _appSecret = "";
+  // static const String _appSecret = "";
 
   static Dio? _instance;
 
   static const int _maxLineWidth = 90;
   static final _prettyDioLogger = PrettyDioLogger(requestHeader: true, requestBody: true, responseBody: true, responseHeader: false, error: true, compact: true, maxWidth: _maxLineWidth);
 
-  static final BaseOptions _options = BaseOptions(baseUrl: baseUrl, connectTimeout: const Duration(seconds: 60), receiveTimeout: const Duration(seconds: 60), headers: {"app-secret": _appSecret});
+  // static final BaseOptions _options = BaseOptions(baseUrl: baseUrl, connectTimeout: const Duration(seconds: 60), receiveTimeout: const Duration(seconds: 60), headers: {"app-secret": _appSecret});
+  static final BaseOptions _options = BaseOptions(baseUrl: baseUrl, connectTimeout: const Duration(seconds: 60), receiveTimeout: const Duration(seconds: 60),);
 
   static Dio get httpDio {
     if (_instance == null) {

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -8,6 +6,7 @@ import 'package:task_assignment/app/config/app_colors.dart';
 
 import 'package:task_assignment/app/config/app_space.dart';
 import 'package:task_assignment/app/config/app_text_styles.dart';
+import 'package:task_assignment/presentation/controllers/logIn_controler.dart';
 import 'package:task_assignment/presentation/screens/signup/signup_screen.dart';
 import 'package:task_assignment/presentation/widgets/base_action_button.dart';
 import 'package:task_assignment/presentation/widgets/base_edit_text.dart';
@@ -22,7 +21,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _textEditingController = TextEditingController();
+  final _logInController = Get.put(LoginControler());
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isObsecure = true;
   @override
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text('Sign In', style: AppTextStyles.boldTitle),
                     SpaceHepler.verticalMedium,
                     BaseEditText(
-                      textController: _textEditingController,
+                      textController: _emailController,
                       inputType: TextInputType.emailAddress,
                       placeHolder: 'Email',
                       prefixIcon: AssetStrings.icEmail,
@@ -84,7 +84,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     SpaceHepler.verticalMedium,
                     Align(alignment: Alignment.centerRight, child: Text('Forgot Password?', style: AppTextStyles.disabledText)),
                     SpaceHepler.verticalMedium,
-                    BaseActionButton(title: 'Login', height: 60, onPress: () {}),
+                    BaseActionButton(
+                        title: 'Login',
+                        height: 60,
+                        onPress: () {
+                          _logInController.processLogin(_emailController, _passwordController);
+                        }),
                     SpaceHepler.verticalLarge,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SpaceHepler.verticalMedium,
                     InkWell(
                       onTap: () {
-                        Get.to(() => SignupScreen(),transition: Transition.rightToLeft);
+                        Get.to(() => SignupScreen(), transition: Transition.rightToLeft);
                       },
                       child: Text(
                         'Create New Account',
