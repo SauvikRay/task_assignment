@@ -5,6 +5,7 @@ import 'package:task_assignment/app/config/app_colors.dart';
 import 'package:task_assignment/app/config/app_constants.dart';
 import 'package:task_assignment/app/config/app_space.dart';
 import 'package:task_assignment/app/config/app_text_styles.dart';
+import 'package:task_assignment/presentation/controllers/logIn_signup_controler.dart';
 import 'package:task_assignment/presentation/widgets/base_action_button.dart';
 import 'package:task_assignment/presentation/widgets/base_edit_text.dart';
 
@@ -20,6 +21,7 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final _singnUpController=Get.put(LoginSignUpControler());
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -116,7 +118,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 SpaceHepler.verticalMedium,
                 SpaceHepler.verticalMedium,
                 SpaceHepler.verticalMedium,
-                BaseActionButton(title: 'Sign Up', height: 60, onPress: () {Get.to(()=>MainBottomNavigationBar(),transition: Transition.rightToLeft);}),
+                BaseActionButton(title: 'Sign Up', height: 60, onPress: () {
+                  _singnUpController.processSignUp( _nameController,_emailController,_passwordController,_confirmpasswordController );
+
+                  
+                  
+                  }),
                 SpaceHepler.verticalLarge,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

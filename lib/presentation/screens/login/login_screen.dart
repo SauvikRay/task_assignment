@@ -21,7 +21,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _logInController = Get.put(LoginControler());
+  final _logInController = Get.put(LoginSignUpControler());
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isObsecure = true;

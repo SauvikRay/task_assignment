@@ -7,17 +7,18 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:task_assignment/domain/repositories/mytask_repositoryImpl.dart';
 import 'package:task_assignment/presentation/screens/bottom_navigation_bar/main_navigation_screen.dart';
+import 'package:task_assignment/presentation/screens/login/login_screen.dart';
 
 import '../../app/config/app_text.dart';
 import '../../data/helper/prefe_keys.dart';
 import '../widgets/loader_widget.dart';
 import 'dart:developer' as dev;
 
-class LoginControler extends GetxController{
+class LoginSignUpControler extends GetxController {
   final _repository = Get.find<MyTaskRepositoryImpl>();
-final _storage=GetStorage();
-  
-  processLogin(TextEditingController emailController,TextEditingController passwordController) {
+  final _storage = GetStorage();
+
+  processLogin(TextEditingController emailController, TextEditingController passwordController) {
     String email = emailController.text.trim();
     String password = passwordController.text;
 
@@ -32,11 +33,11 @@ final _storage=GetStorage();
     }
 
     if (errorMessage.isEmpty) {
-     login(email, password, (isSuccess) {
+      login(email, password, (isSuccess) {
         if (isSuccess) {
           //Load profile data
           // _controller.profile(widget.isFromComment);
-          Get.offAll(()=>const MainBottomNavigationBar(),transition: Transition.cupertino);
+          Get.offAll(() => const MainBottomNavigationBar(), transition: Transition.cupertino);
         }
       });
     } else {
@@ -44,21 +45,19 @@ final _storage=GetStorage();
     }
   }
 
-
-
-   login(String email, String password, Function(bool isSuccess) onSuccess) async {
+  login(String email, String password, Function(bool isSuccess) onSuccess) async {
     await showLoader();
 
     try {
-      var signInResponse = await _repository.userLogin(email,password);
-      if(signInResponse.statusCode==200){
+      var signInResponse = await _repository.userLogin(email, password);
+      if (signInResponse.statusCode == 200) {
         Get.back();
 
-Map<String,dynamic> userData= {'name':signInResponse.userDisplayName,'email':signInResponse.userEmail,'nickName':signInResponse.userNicename};
+        Map<String, dynamic> userData = {'name': signInResponse.userDisplayName, 'email': signInResponse.userEmail, 'nickName': signInResponse.userNicename};
         _storage.write(PrefKeys.usersToken, signInResponse.token);
         _storage.write(PrefKeys.isLoggedIn, true);
 
-        _storage.write(PrefKeys.userData,userData);
+        _storage.write(PrefKeys.userData, userData);
         dev.log("usersingUpToken ${_storage.read(PrefKeys.usersToken)}");
         if (kDebugMode) {
           print("Sing in SucessFull");
@@ -78,17 +77,13 @@ Map<String,dynamic> userData= {'name':signInResponse.userDisplayName,'email':sig
     }
   }
 
-  
-
-
-
-_processSignUp(TextEditingController nameController,TextEditingController emailCOntroller,TextEditingController passwordController,TextEditingController confPasswordController) {
+  processSignUp(TextEditingController nameController, TextEditingController emailCOntroller, TextEditingController passwordController, TextEditingController confPasswordController) {
     String firstName = nameController.text;
 
     String email = emailCOntroller.text.trim();
     String password = passwordController.text;
     String confirmedPass = confPasswordController.text;
-    
+
     String errorMessage = "";
 
     if (firstName.isEmpty) {
@@ -101,45 +96,51 @@ _processSignUp(TextEditingController nameController,TextEditingController emailC
       errorMessage = AppText.passwordText;
     } else if (password.length < 6) {
       errorMessage = AppText.passwordLength;
-    }  else if (password != confirmedPass) {
+    } else if (password != confirmedPass) {
       errorMessage = AppText.passConfirmNotMatch;
     }
 
     if (errorMessage.isEmpty) {
-    signUp(firstName, email, password);
-
+      signUp(firstName, email, password);
     } else {
       Fluttertoast.showToast(msg: errorMessage);
     }
   }
 
-
-
-
-
-void signUp(String fName,  String email,  String password) async {
+  void signUp(String fName, String email, String password) async {
     await showLoader();
     try {
-      // var response = await _repository.singUpDetails(fName, lName, email, birth, password, gender, loaction);
+      var response = await _repository.userSignUp(fName, email, password, );
 
-      // if (response.status == true) {
-      //   var userToken = "${response.data?.token}";
+      if (response.statusCode == 200) {
+                  Get.offAll(()=>const LoginScreen(),transition: Transition.rightToLeft);
+        Fluttertoast.showToast(msg: '${response.message}. You need to login' ?? "");
+  
 
-      //   _storage.write(PrefKeys.usersToken, userToken);
-      //   singUpResponse.value = response;
-      //   Fluttertoast.showToast(msg: response.message ?? "");
-      //   _storage.write(PrefKeys.isLoggedIn, true);
-
-      //   if (kDebugMode) {
-      //     print("postsingUpetails");
-      //   }
-      // } else {
-      //   Fluttertoast.showToast(msg: response.message ?? "Something went wrong");
-      // }
-      // Get.back();
+        if (kDebugMode) {
+          print("postsingUpetails");
+        }
+      } else {
+        Fluttertoast.showToast(msg: response.message ?? "Something went wrong");
+      }
+      Get.back();
     } catch (erroe) {
       Get.back();
     }
   }
-  
 }
+
+
+
+// {
+//     "code": 200,
+//     "message": "User 'test001' Registration was Successful"
+// }
+
+// {
+//     "code": 406,
+//     "message": "Username already exists, please enter another username",
+//     "data": {
+//         "status": 400
+//     }
+// }

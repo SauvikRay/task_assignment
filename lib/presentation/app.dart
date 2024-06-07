@@ -37,7 +37,7 @@ class App extends StatelessWidget {
         systemNavigationBarColor:platformBrigthness == Brightness.dark ? Colors.black87: AppColors.scaffoldColor,
         ),
         
-        child: _storage.read(PrefKeys.isLoggedIn)?const  MainBottomNavigationBar() : const LoginScreen(),
+        child: (_storage.read(PrefKeys.isLoggedIn) ==null ||  !_storage.read(PrefKeys.isLoggedIn)) ?const LoginScreen():const  MainBottomNavigationBar() ,
     ));
   }
 }
