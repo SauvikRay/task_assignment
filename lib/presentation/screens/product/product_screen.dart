@@ -11,7 +11,10 @@ import 'package:svg_flutter/svg.dart';
 import 'package:task_assignment/app/config/app_space.dart';
 import 'package:task_assignment/app/config/app_text_styles.dart';
 import 'package:task_assignment/app/config/asset_strings.dart';
+import 'package:task_assignment/data/models/product_response.dart';
+import 'package:task_assignment/presentation/controllers/product_controller.dart';
 import 'package:task_assignment/presentation/widgets/base_action_button.dart';
+import 'package:task_assignment/presentation/widgets/loader_widget.dart';
 
 import '../../../app/config/app_colors.dart';
 import '../../widgets/apply_and_cancle_button.dart';
@@ -30,12 +33,16 @@ class _ProductScreenState extends State<ProductScreen> with TickerProviderStateM
   String? selectedRadio;
   List<String> selectString = [];
   late ScrollController _scrollController;
-
+final _productController = Get.put(ProductController());
   @override
   void initState() {
     _scrollController = ScrollController();
     animationController =
         AnimationController(vsync: this, duration: Durations.long3, animationBehavior: AnimationBehavior.normal, reverseDuration: Durations.long3);
+
+WidgetsBinding.instance.addPostFrameCallback((_){
+  _productController.getResponse();
+});
     super.initState();
   }
 
@@ -71,23 +78,28 @@ class _ProductScreenState extends State<ProductScreen> with TickerProviderStateM
           child: buildFilterAndSortWidget(context),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: GridView.builder(
-          controller: _scrollController,
-          shrinkWrap: true,
-          physics: BouncingScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            mainAxisExtent: 290,
-          ),
-          itemCount: 40,
-          itemBuilder: (context, index) {
-            return ProductWidget();
-          },
-        ),
+      body: Obx(
+    () {
+          return (_productController.productList !=null && _productController.productList.isNotEmpty)? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: GridView.builder(
+              controller: _scrollController,
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                mainAxisExtent: 290,
+              ),
+              itemCount: _productController.productList.length,
+              itemBuilder: (context, index) {
+                final Product product = _productController.productList[index];
+                return ProductWidget(product:product);
+              },
+            ),
+          ) : loaderWidget();
+        }
       ),
     );
   }
@@ -234,7 +246,10 @@ class _ProductScreenState extends State<ProductScreen> with TickerProviderStateM
                                   onCancle: () {
                                     Get.back();
                                   },
-                                  onApply: () {},
+                                  onApply: () {
+                                    _productController.sortProductList('price low to heigh');
+                                       Get.back();
+                                  },
                                 ),
                               ),
                               SpaceHepler.verticalMedium,
@@ -254,14 +269,34 @@ class _ProductScreenState extends State<ProductScreen> with TickerProviderStateM
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key, required this.index});
   final int index;
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+
+@override
+  void initState() {
+ 
+    
+    
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('HomePage '),
+        child: Column(children: [
+          Image.network('https://mobileapp.getdokan.com/wp-content/uploads/2021/09/wecare.png')
+        ],),
       ),
     );
   }
