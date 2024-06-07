@@ -76,7 +76,7 @@ class _OverlayBannerState extends State<OverlayBanner> with SingleTickerProvider
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Expanded(child: Text(widget.message, maxLines: 2, style: AppTextStyles.warningText)),
+                          Expanded(child: Text(widget.message, maxLines: 2, style: AppTextStyles.warningText,textAlign: TextAlign.center,)),
                         ],
                       ),
                     ),
