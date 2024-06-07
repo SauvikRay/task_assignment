@@ -4,9 +4,9 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:task_assignment/data/models/login_response.dart';
 
-import '../../models/signup_response.dart';
+import '../../../models/login_response.dart';
+import '../../../models/signup_response.dart';
 import '../core/base_remote_source.dart';
 import 'mytask_remote_data_source.dart';
 

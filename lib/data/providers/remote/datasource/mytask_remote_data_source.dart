@@ -1,7 +1,7 @@
 
 
-import '../../models/login_response.dart';
-import '../../models/signup_response.dart';
+import '../../../models/login_response.dart';
+import '../../../models/signup_response.dart';
 
 abstract class MyTaskRemoteDataSource {
   //Start
