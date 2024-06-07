@@ -242,7 +242,7 @@ class _AccountPageState extends State<AccountPage> {
             SpaceHepler.verticalMedium,
             Text('Sauvik Ray', style: AppTextStyles.boldTitle),
             SpaceHepler.verticalSmall,
-            Text('info@johnsmith.com', style: AppTextStyles.disableText(color: const Color(0xFF535353))),
+            Text(emailcontroller.text, style: AppTextStyles.disableText(color: const Color(0xFF535353))),
             SpaceHepler.verticalMedium,
             prepareProfileRelatedData(_prepareSupportUs()),
             SpaceHepler.verticalMedium,
